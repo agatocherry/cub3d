@@ -6,7 +6,7 @@
 /*   By: agcolas <agcolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 09:17:28 by agcolas           #+#    #+#             */
-/*   Updated: 2022/05/31 15:18:27 by agcolas          ###   ########.fr       */
+/*   Updated: 2022/06/07 11:47:08 by agcolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "../libft/libft.h"
+# include "../libmlx/mlx.h"
 
 # include <stdio.h>
 # include <sys/types.h>
@@ -69,6 +70,6 @@ void	print_map(t_map *map);
 void	map(char *line, t_file *file);
 void	parsing_garbage(t_file *file);
 
-int		launch(t_file *file);
+int		game_launch(t_file *file);
 
 #endif

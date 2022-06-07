@@ -1,2 +1,0 @@
-language = "bash"
-run = "make && ./cub3d file.cub && make fclean"

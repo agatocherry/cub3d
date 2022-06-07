@@ -6,13 +6,13 @@
 /*   By: agcolas <agcolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 11:43:21 by agcolas           #+#    #+#             */
-/*   Updated: 2022/06/03 16:05:06 by agcolas          ###   ########.fr       */
+/*   Updated: 2022/06/07 11:30:26 by agcolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	launch(t_file *file)
+int	game_launch(t_file *file)
 {
 	return (0);
 }

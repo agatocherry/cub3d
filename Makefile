@@ -1,44 +1,36 @@
 # Variables
 
+CC		=	clang
+CFLAGS	=	-c 
+# -Wall -Werror -Wextra
 NAME	=	cub3d
-HEADER	=	./include/cub3d.h
-LIBFT	=	-L libft -lft
-CC		=	gcc
-CFLAGS	=	-I include/ 
-# don't forget to use these flags : -Wall -Werror -Wextra
 SRCS	=	src/main.c \
 			src/parsing/lst/add.c src/parsing/lst/garbage.c \
-			src/parsing/file.c src/parsing/color.c src/parsing/texture.c src/parsing/map.c src/parsing/error.c src/parsing/garbage.c
+			src/parsing/file.c src/parsing/color.c src/parsing/texture.c src/parsing/map.c src/parsing/error.c src/parsing/garbage.c \
+			src/game/launch.c
 OBJ		=	$(SRCS:.c=.o)
-
-# Colors
-
-CYAN	=	'\033[0;36m'
-RED		=	'\033[0;31m'
-NOCOLOR	=	'\033[0m'
 
 # Rules
 
 all: $(NAME)
 
-$(NAME):	$(OBJ) $(HEADER)
-	@make -C libft/ --no-print-directory
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT)
-	@echo  $(CYAN)"Compiling $(NAME) done"$(NOCOLOR)
+$(NAME):	$(OBJ)
+	@make -C libft --no-print-directory
+	@make -C libmlx --no-print-directory
+	@$(CC) $(OBJ) -o $(NAME) -lXext -lX11 -lm libmlx/libmlx_Linux.a libft/libft.a 
+	@echo "Compiling $(NAME) done"
 
-%.o: %.c $(HEADER)
+%.o: %.c
 	@$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
 	@rm -rf $(OBJ)
-	@make clean -C libft/ --no-print-directory
-	@echo $(RED)"! Removed $(OBJ)"$(NOCOLOR)
+	@make clean -C libft --no-print-directory
 
 fclean: clean
 	@rm -rf $(NAME)
-	@make fclean -C libft/ --no-print-directory
-	@echo $(RED)"! Removed $(NAME)"$(NOCOLOR)
+	@make clean -C libmlx --no-print-directory
+	@make fclean -C libft --no-print-directory
+	@echo "! Removed $(NAME)"
 
 re: fclean all
-
-.PHONY: all clean fclean re
