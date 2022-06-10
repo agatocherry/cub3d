@@ -50,6 +50,13 @@ typedef struct s_file
 	t_map		*map;
 }	t_file;
 
+typedef struct s_cub
+{
+	t_file	file;
+	void	*mlx;
+	void	*mlx_win;
+}	t_cub;
+
 int		error_message(char *str);
 int		error_file(char *file);
 int		error_map(t_map *map);
@@ -70,6 +77,6 @@ void	print_map(t_map *map);
 void	map(char *line, t_file *file);
 void	parsing_garbage(t_file *file);
 
-int		game_launch(t_file *file);
+int		game_launch(t_cub *cub);
 
 #endif

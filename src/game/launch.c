@@ -12,13 +12,10 @@
 
 #include "../../include/cub3d.h"
 
-int	game_launch(t_file *file)
+int	game_launch(t_cub *cub)
 {
-	void	*mlx;
-	void	*mlx_win;
-
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 640, 480, "Cub3d");
-	mlx_loop(mlx);
+	cub->mlx = mlx_init();
+	cub->mlx_win = mlx_new_window(cub->mlx, 640, 480, "Cub3d");
+	mlx_loop(cub->mlx);
 	return (0);
 }

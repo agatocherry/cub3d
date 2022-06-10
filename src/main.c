@@ -18,21 +18,21 @@
 
 int	main(int argc, char **argv)
 {
-	t_file	file;
+	t_cub	cub;
 
 	if (argv[1] == NULL)
 		return (error_message("Usage: ./cub3d [FILE].cub"));
-	if (parsing(argv[1], &file) == 1)
+	if (parsing(argv[1], &cub.file) == 1)
 	{
-		parsing_garbage(&file);
+		parsing_garbage(&cub.file);
 		return (1);
 	}
-	print_map(file.map);
-	if (game_launch(&file) == 1)
+	print_map(cub.file.map);
+	if (game_launch(&cub) == 1)
 	{
-		parsing_garbage(&file);
+		parsing_garbage(&cub.file);
 		return (1);
 	}
-	parsing_garbage(&file);
+	parsing_garbage(&cub.file);
 	return (0);
 }
