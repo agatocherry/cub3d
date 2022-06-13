@@ -74,7 +74,7 @@ int	parsing(char *file_name, t_file *file)
 	nb_line = 0;
 	if (error_file(file_name) == 1)
 		return (1);
-	fd = open(file_name, O_APPEND);
+	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
 		return (error_message(strerror(errno)));
 	while (ft_gnl(fd, &line) > 0)

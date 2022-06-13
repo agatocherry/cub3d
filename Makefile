@@ -1,13 +1,13 @@
 # Variables
 
 CC		=	clang
-CFLAGS	=	-c 
+CFLAGS	=	-g 
 # -Wall -Werror -Wextra
 NAME	=	cub3d
 SRCS	=	src/main.c \
 			src/parsing/lst/add.c src/parsing/lst/garbage.c \
 			src/parsing/file.c src/parsing/color.c src/parsing/texture.c src/parsing/map.c src/parsing/error.c src/parsing/garbage.c \
-			src/game/launch.c
+			src/game/launch.c src/game/keys.c src/draw/drawWindow.c
 OBJ		=	$(SRCS:.c=.o)
 
 # Rules

@@ -22,6 +22,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <string.h>
+# include <math.h>
 
 typedef struct s_texture
 {
@@ -43,6 +44,42 @@ typedef struct s_map
 	struct s_map	*next;
 }	t_map;
 
+typedef struct s_player
+{
+	double	x;
+	double	y;
+	double	dir_x;
+	double	dir_y;
+	double	camera;
+	double	plane_x;
+	double	plane_y;
+	double	moveSpeed;
+	double	rotSpeed;
+	int		left;
+	int		right;
+	int		forward;
+	int		backwards;
+	int		rotleft;
+	int		rotright;
+}	t_player;
+
+typedef struct s_ray
+{
+	int		mapX;
+	int		mapY;
+	double	dir_x;
+	double	dir_y;
+	double	sideDistX;
+	double	sideDistY;
+	double	deltaDistX;
+	double	deltaDistY;
+	double	perpWallDist;
+	int		stepX;
+	int		stepY;
+	int		hit;
+	int		side;
+}	t_ray;
+
 typedef struct s_file
 {
 	t_color		color;
@@ -50,11 +87,24 @@ typedef struct s_file
 	t_map		*map;
 }	t_file;
 
+typedef struct s_data
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_l;
+	int		endian;
+}	t_data;
+
+
 typedef struct s_cub
 {
-	t_file	file;
-	void	*mlx;
-	void	*mlx_win;
+	t_file		file;
+	t_player	player;
+	t_ray		ray;
+	void		*mlx;
+	void		*mlx_win;
+	t_data		img;
 }	t_cub;
 
 int		error_message(char *str);
@@ -78,5 +128,14 @@ void	map(char *line, t_file *file);
 void	parsing_garbage(t_file *file);
 
 int		game_launch(t_cub *cub);
+void    draw_window(t_player *pl, t_data *img, t_ray *ray);
+void	moveleft(t_player *pl);
+void    rotateright(t_player *pl);
+void    rotateleft(t_player *pl);
+void    movebackward(t_player *pl);
+void    moveforward(t_player *pl);
+void    moveright(t_player *pl);
+
+extern int worldMap[24][24];
 
 #endif
