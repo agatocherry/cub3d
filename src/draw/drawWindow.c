@@ -26,8 +26,14 @@ void    draw_window(t_player *pl, t_data *img, t_ray *ray)
         ray->dir_y = pl->dir_y + pl->plane_y * pl->camera;
         ray->mapX = (int)pl->x;
         ray->mapY = (int)pl->y;
-        ray->deltaDistX = fabs(1 / ray->dir_x);
-        ray->deltaDistY = fabs(1 / ray->dir_y);
+        if (ray->dir_x == 0)
+            ray->deltaDistX = 1e30;
+        else
+            ray->deltaDistX = fabs(1 / ray->dir_x);
+        if (ray->dir_y == 0)
+            ray->deltaDistY = 1e30;
+        else
+            ray->deltaDistY = fabs(1 / ray->dir_y);
         ray->hit = 0;
         if (ray->dir_x < 0)
         {
@@ -37,7 +43,7 @@ void    draw_window(t_player *pl, t_data *img, t_ray *ray)
         else
         {
             ray->stepX = 1;
-            ray->deltaDistX = (ray->mapX + 1.0 - pl->x) * ray->deltaDistX;
+            ray->sideDistX = (ray->mapX + 1.0 - pl->x) * ray->deltaDistX;
         }
         if (ray->dir_y < 0)
         {
@@ -47,7 +53,7 @@ void    draw_window(t_player *pl, t_data *img, t_ray *ray)
         else
         {
             ray->stepY = 1;
-            ray->deltaDistY = (ray->mapY + 1.0 - pl->y) * ray->deltaDistY;
+            ray->sideDistY = (ray->mapY + 1.0 - pl->y) * ray->deltaDistY;
         }
         while (ray->hit == 0)
         {
