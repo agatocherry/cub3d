@@ -1,8 +1,8 @@
 # Variables
 
 CC		=	clang
-CFLAGS	=	-c 
-# -Wall -Werror -Wextra
+CFLAGS	=	
+# Don't forget -Wall -Werror -Wextra !
 NAME	=	cub3d
 SRCS	=	src/main.c \
 			src/parsing/lst/add.c src/parsing/lst/garbage.c \
@@ -33,4 +33,13 @@ fclean: clean
 	@make fclean -C libft --no-print-directory
 	@echo "! Removed $(NAME)"
 
-re: fclean all
+test: $(NAME)
+	./$(NAME) file.cub
+
+vtest: $(NAME)
+	valgrind ./$(NAME) file.cub
+
+re: fclean
+	make all
+
+.PHONY: all clean fclean re test vtest
