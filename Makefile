@@ -35,4 +35,13 @@ fclean: clean
 	@make fclean -C libft --no-print-directory
 	@echo "! Removed $(NAME)"
 
-re: fclean all
+test: $(NAME)
+	./$(NAME) file.cub
+
+vtest: $(NAME)
+	valgrind ./$(NAME) file.cub
+
+re: fclean
+	make all
+
+.PHONY: all clean fclean re test vtest
