@@ -24,12 +24,45 @@
 # include <string.h>
 # include <math.h>
 
+# define WIDTH 1280
+# define HEIGHT 720
+# define TEXWIDTH 64
+# define TEXHEIGHT 64
+
 typedef struct s_texture
 {
 	char	*no;
 	char	*so;
 	char	*we;
 	char	*ea;
+	void	*tex_imgNO;
+	void	*tex_imgSO;
+	void	*tex_imgWE;
+	void	*tex_imgEA;
+	int		eaW;
+	int		eaH;
+	int		noW;
+	int		noH;
+	int		weW;
+	int		weH;
+	int		soW;
+	int		soH;
+	int		ea_bpp;
+	int		ea_sl;
+	int		ea_en;
+	int		no_bpp;
+	int		no_sl;
+	int		no_en;
+	int		so_bpp;
+	int		so_sl;
+	int		so_en;
+	int		we_bpp;
+	int		we_sl;
+	int		we_en;
+	int	*texNO;
+	int	*texSO;
+	int	*texWE;
+	int		*texEA;
 }	t_texture;
 
 typedef struct s_color
@@ -46,6 +79,7 @@ typedef struct s_map
 
 typedef struct s_player
 {
+	char	init_dir;
 	double	x;
 	double	y;
 	double	dir_x;
@@ -53,8 +87,6 @@ typedef struct s_player
 	double	camera;
 	double	plane_x;
 	double	plane_y;
-	double	moveSpeed;
-	double	rotSpeed;
 	int		left;
 	int		right;
 	int		forward;
@@ -78,6 +110,8 @@ typedef struct s_ray
 	int		stepY;
 	int		hit;
 	int		side;
+	double	wallX;
+	char	wallDir;
 }	t_ray;
 
 typedef struct s_file
@@ -96,7 +130,6 @@ typedef struct s_data
 	int		endian;
 }	t_data;
 
-
 typedef struct s_cub
 {
 	t_file		file;
@@ -105,6 +138,9 @@ typedef struct s_cub
 	void		*mlx;
 	void		*mlx_win;
 	t_data		img;
+	t_texture	texture;
+	t_color		colors;
+	char		**map;
 }	t_cub;
 
 int		error_message(char *str);
@@ -128,13 +164,15 @@ void	map(char *line, t_file *file);
 void	parsing_garbage(t_file *file);
 
 int		game_launch(t_cub *cub);
-void    draw_window(t_player *pl, t_data *img, t_ray *ray);
+void    draw_window(t_texture *tex, t_player *pl, t_data *img, t_ray *ray);
 void	moveleft(t_player *pl);
 void    rotateright(t_player *pl);
 void    rotateleft(t_player *pl);
 void    movebackward(t_player *pl);
 void    moveforward(t_player *pl);
 void    moveright(t_player *pl);
+int		parse_textures(t_cub *cub, t_file *file);
+int		init_player(t_cub *cub);
 
 extern int worldMap[24][24];
 

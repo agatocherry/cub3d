@@ -1,27 +1,39 @@
 #include "../../include/cub3d.h"
 
-void    draw_line(int col, int start, int end, t_data *img, int color)
+void    draw_line(int col, int start, int end, t_data *img)
 {
     char    *dst;
-    int     y = start;
+    int color = 7;
+    int     y = 0;
 
+    while (y < start)
+    {
+        dst = img->addr + (y * img->line_l + col * (img->bpp / 8));
+        *(unsigned int*)dst = 0x54E78602;
+        y++;
+    }
     while (y < end)
     {
         dst = img->addr + (y * img->line_l + col * (img->bpp / 8));
         *(unsigned int*)dst = color;
         y++;
     }
+        while (y < HEIGHT)
+    {
+        dst = img->addr + (y * img->line_l + col * (img->bpp / 8));
+        *(unsigned int*)dst = 0x74AE21AE;
+        y++;
+    }
 }
 
-void    draw_window(t_player *pl, t_data *img, t_ray *ray)
+void    draw_window(t_texture *tex, t_player *pl, t_data *img, t_ray *ray)
 {
     int col = 0;
-    int width = 640;
-    int height = 480;
+    double w = WIDTH;
 
-    while (col < width)
+    while (col < w)
     {
-        pl->camera = 2 * col / (double)width - 1;
+        pl->camera = 2 * col / w - 1;
         ray->dir_x = pl->dir_x + pl->plane_x * pl->camera;
         ray->dir_y = pl->dir_y + pl->plane_y * pl->camera;
         ray->mapX = (int)pl->x;
@@ -73,27 +85,86 @@ void    draw_window(t_player *pl, t_data *img, t_ray *ray)
                 ray->hit = 1;
         }
         if (ray->side == 0)
+        {
+            if (ray->mapX < pl->x)
+                ray->wallDir = 'N';
+            else
+                ray->wallDir = 'S';
             ray->perpWallDist = (ray->sideDistX - ray->deltaDistX);
+            ray->wallX = pl->y + ray->perpWallDist * ray->dir_y;
+        }
         else
+        {
+            if (ray->mapY < pl->y)
+                ray->wallDir = 'W';
+            else
+                ray->wallDir = 'E';
             ray->perpWallDist = (ray->sideDistY - ray->deltaDistY);
+            ray->wallX = pl->x + ray->perpWallDist * ray->dir_x;
+        }
+        ray->wallX -= floor((ray->wallX));
         
-        int lineHeight = (int)(height / ray->perpWallDist);
-        int drawStart = -lineHeight / 2 + height / 2;
+        int texX = (int)(ray->wallX * (double)TEXWIDTH);
+        if (ray->side == 0 && ray->dir_x > 0)
+            texX = TEXWIDTH - texX - 1;
+        if (ray->side == 1 && ray->dir_y < 0)
+            texX = TEXWIDTH - texX - 1;
+
+        int lineHeight = (int)(HEIGHT / ray->perpWallDist);
+        int drawStart = -lineHeight / 2 + HEIGHT / 2;
         
         if (drawStart < 0)
             drawStart = 0;
         
-        int drawEnd = lineHeight / 2 + height / 2;
+        int drawEnd = lineHeight / 2 + HEIGHT / 2;
         
-        if (drawEnd >= height)
-            drawEnd = height - 1;
+        if (drawEnd >= HEIGHT)
+            drawEnd = HEIGHT - 1;
         
-        int color = 0x0F56A414;
+        // int color = 0x0F56A414;
 
-        if (ray->side == 1)
-            color = color / 2;
+        // if (ray->side == 1)
+        //     color = color / 2;
         
-        draw_line(col, drawStart, drawEnd, img, color);
+        double step = 1.0 * TEXHEIGHT / lineHeight;
+        double texPos = (drawStart - HEIGHT / 2 + lineHeight / 2) * step;
+        
+        int y = 0;
+        int color;
+        int texY;
+        char *dst;
+        int *text;
+        if (ray->wallDir == 'N')
+            text = tex->texNO;
+        else if (ray->wallDir == 'S')
+            text = tex->texSO;
+        else if (ray->wallDir == 'E')
+            text = tex->texEA;
+        else if (ray->wallDir == 'W')
+            text = tex->texWE;
+
+        while (y < drawStart)
+        {
+            dst = img->addr + (y * img->line_l + col * (img->bpp / 8));
+            *(unsigned int*)dst = 0x00070E97;
+            y++;
+        }
+        while (y < drawEnd)
+        {
+            dst = img->addr + (y * img->line_l + col * (img->bpp / 8));
+            texY = (int)texPos & (TEXHEIGHT - 1);
+            texPos += step;
+            color = text[TEXHEIGHT * texY + texX];
+            *(unsigned int*)dst = color;
+            y++;
+        }
+        while (y < HEIGHT)
+        {
+            dst = img->addr + (y * img->line_l + col * (img->bpp / 8));
+            *(unsigned int*)dst = 0x00FFDC4C;
+            y++;
+        }
+
         if (pl->left)
             moveleft(pl);
         if (pl->right)

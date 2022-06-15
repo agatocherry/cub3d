@@ -20,11 +20,12 @@ int	close_game(t_cub *cub)
 
 int	loop_game(t_cub *cub)
 {
-	cub->img.img = mlx_new_image(cub->mlx, 640, 480);
+	cub->img.img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	cub->img.addr = mlx_get_data_addr(cub->img.img, &cub->img.bpp,
 		&cub->img.line_l, &cub->img.endian);
-	draw_window(&cub->player, &cub->img, &cub->ray);
+	draw_window(&cub->file.texture, &cub->player, &cub->img, &cub->ray);
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.img, 0, 0);
+	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->file.texture.tex_imgEA, 0, 0);
 	mlx_destroy_image(cub->mlx, cub->img.img);
 	return (0);
 }
@@ -46,7 +47,6 @@ int	key_pressed(int key, t_cub *cub)
 		cub->player.rotright = 1;
 	if (key == 65307)
 		close_game(cub);
-	// printf("key: %d", key);
 	return (0);
 }
 
@@ -69,8 +69,9 @@ int	key_released(int key, t_cub *cub)
 
 int	game_launch(t_cub *cub)
 {
-	cub->mlx = mlx_init();
-	cub->mlx_win = mlx_new_window(cub->mlx, 640, 480, "Cub3d");
+	cub->mlx = mlx_init(); // protéger toutes les fonctions mlx
+	cub->mlx_win = mlx_new_window(cub->mlx, WIDTH, HEIGHT, "Cub3d");
+	parse_textures(cub, &cub->file);
 	mlx_hook(cub->mlx_win, 2, 1L << 0, key_pressed, (void *)cub);
 	mlx_key_hook(cub->mlx_win, key_released, (void *)cub);
 	mlx_hook(cub->mlx_win, 17, 1, close_game, (void *)cub);
