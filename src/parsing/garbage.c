@@ -14,27 +14,44 @@
 
 static void	texture_garbage(t_texture *texture)
 {
-	if (texture->no)
-		free(texture->no);
-	if (texture->so)
-		free(texture->so);
-	if (texture->we)
-		free(texture->we);
-	if (texture->ea)
-		free(texture->ea);
+	free(texture->no);
+	free(texture->so);
+	free(texture->we);
+	free(texture->ea);
+	free(texture->tex_imgNO);
+	free(texture->tex_imgSO);
+	free(texture->tex_imgWE);
+	free(texture->tex_imgEA);
+	free(texture->texNO);
+	free(texture->texSO);
+	free(texture->texWE);
+	free(texture->texEA);
 }
 
-static void	color_garbage(t_color *color)
+void	mapclear(char **map)
 {
-	if (color->f)
-		free(color->f);
-	if (color->c)
-		free(color->c);
+	int	i;
+
+	i = -1;
+	if (!map)
+		return ;
+	while (map[++i])
+		free(map[i]);
+	free(map);
 }
 
-void	parsing_garbage(t_file *file)
+void	cleardata(t_data *data)
 {
-	texture_garbage(&file->texture);
-	color_garbage(&file->color);
-	mapclear(&file->map);
+	free(data->img);
+	free(data->addr);
+}
+
+void	parsing_garbage(t_cub *cub)
+{
+	texture_garbage(&cub->tex);
+	mapclear(cub->map);
+	cleardata(&cub->img);
+	cleardata(&cub->minimap);
+	free(cub->mlx);
+	free(cub->mlx_win);
 }

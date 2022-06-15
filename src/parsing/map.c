@@ -32,20 +32,19 @@ int	is_map(char *line)
 	return (0);
 }
 
-void	print_map(t_map *map)
+void	print_map(char **map)
 {
 	int	i;
 
 	i = 0;
-	while (map)
+	while (map[i])
 	{
-		printf("Map %i [%s]\n", i, map->line);
-		map = map->next;
+		printf("Map %i [%s]\n", i, map[i]);
 		i++;
 	}
 }
 
-void	map(char *line, t_file *file)
-{
-	mapadd_back(&file->map, mapnew(ft_substr(line, 0, ft_strlen(line) - 1)));
-}
+// void	map(char *line, t_file *file)
+// {
+// 	mapadd_back(&file->map, mapnew(ft_substr(line, 0, ft_strlen(line) - 1)));
+// }
