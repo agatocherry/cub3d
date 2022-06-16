@@ -1,7 +1,7 @@
 # Variables
 
 CC		=	clang
-CFLAGS	=	-g #-Wall -Werror -Wextra 
+CFLAGS	=	-g #-Wall -Werror -Wextra
 NAME	=	cub3d
 SRCS	=	src/main.c \
 			src/parsing/file.c src/parsing/error.c src/parsing/garbage.c src/parsing/init.c \
@@ -19,7 +19,7 @@ all: $(NAME)
 $(NAME):	$(OBJ)
 	@make -C libft --no-print-directory
 	@make -C libmlx --no-print-directory
-	@$(CC) $(OBJ) -o $(NAME) -lXext -lX11 -lm libmlx/libmlx_Linux.a libft/libft.a 
+	@$(CC) $(OBJ) -o $(NAME) -lXext -lX11 -lm libmlx/libmlx_Linux.a libft/libft.a
 	@echo "Compiling $(NAME) done"
 
 %.o: %.c
@@ -36,10 +36,10 @@ fclean: clean
 	@echo "! Removed $(NAME)"
 
 test: $(NAME)
-	./$(NAME) file.cub
+	./$(NAME) maps/file.cub
 
 vtest: $(NAME)
-	valgrind ./$(NAME) file.cub
+	valgrind ./$(NAME) maps/file.cub
 
 re: fclean
 	make all
