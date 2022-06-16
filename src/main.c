@@ -20,19 +20,24 @@ int	main(int argc, char **argv)
 {
 	t_cub	cub;
 
-	if (argv[1] == NULL)
+	if (argc != 2)
 		return (error_message("Usage: ./cub3d [FILE].cub"));
-	if (parsing(argv[1], &cub.file) == 1)
+  	cub.tex = (t_texture){0};
+  	cub.img = (t_data){0};
+  	cub.minimap = (t_data){0};
+  	cub.color = (t_color){0};
+	if (parsing(argv[1], &cub) == 1)
 	{
-		parsing_garbage(&cub.file);
+		parsing_garbage(&cub);
 		return (1);
 	}
-	print_map(cub.file.map);
+	//print_map(cub.map);
+  	init_player(&cub); //-> This function gets the x and y coordinates of the player and its initial direction
 	if (game_launch(&cub) == 1)
 	{
-		parsing_garbage(&cub.file);
+		parsing_garbage(&cub);
 		return (1);
 	}
-	parsing_garbage(&cub.file);
+	parsing_garbage(&cub);
 	return (0);
 }

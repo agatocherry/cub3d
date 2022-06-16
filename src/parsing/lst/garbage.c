@@ -12,17 +12,14 @@
 
 #include "../../../include/cub3d.h"
 
-void	mapclear(t_map **map)
+void	mapclear(char **map)
 {
-	t_map	*temp;
+	int	i;
 
-	if (!map || !(*map))
+	i = -1;
+	if (!map)
 		return ;
-	while (*map)
-	{
-		temp = (*map)->next;
-		free((*map)->line);
-		free(*map);
-		*map = temp;
-	}
+	while (map[++i])
+		free(map[i]);
+	free(map);
 }
