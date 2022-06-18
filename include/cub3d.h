@@ -35,19 +35,19 @@ typedef struct s_texture
 	char	*so;
 	char	*we;
 	char	*ea;
-	void	*tex_imgNO;
-	void	*tex_imgSO;
-	void	*tex_imgWE;
-	void	*tex_imgEA;
-	int		tex_W;
-	int		tex_H;
+	void	*tex_img_no;
+	void	*tex_img_so;
+	void	*tex_img_we;
+	void	*tex_img_ea;
+	int		tex_w;
+	int		tex_h;
 	int		tex_bpp;
 	int		tex_sl;
 	int		tex_en;
-	int		*texNO;
-	int		*texSO;
-	int		*texWE;
-	int		*texEA;
+	int		*tex_no;
+	int		*tex_so;
+	int		*tex_we;
+	int		*tex_ea;
 }	t_texture;
 
 typedef struct s_color
@@ -76,20 +76,20 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	int		mapX;
-	int		mapY;
+	int		map_x;
+	int		map_y;
 	double	dir_x;
 	double	dir_y;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	double	perpWallDist;
-	int		stepX;
-	int		stepY;
+	double	side_distx;
+	double	side_disty;
+	double	delta_distx;
+	double	delta_disty;
+	double	perp_walldist;
+	int		stepx;
+	int		stepy;
 	int		hit;
 	int		side;
-	double	wallX;
+	double	wallx;
 	int		*text;
 }	t_ray;
 
@@ -137,22 +137,22 @@ void	map(char *line, t_cub *cub);
 void	parsing_garbage(t_cub *cub);
 
 int		game_launch(t_cub *cub);
-void    draw_window(t_cub *cub);
+void	draw_window(t_cub *cub);
 void	moveleft(char **map, t_player *pl);
-void    rotateright(t_player *pl);
-void    rotateleft(t_player *pl);
-void    movebackward(char **map, t_player *pl);
-void    moveforward(char **map, t_player *pl);
-void    moveright(char **map, t_player *pl);
+void	rotateright(t_player *pl);
+void	rotateleft(t_player *pl);
+void	movebackward(char **map, t_player *pl);
+void	moveforward(char **map, t_player *pl);
+void	moveright(char **map, t_player *pl);
 int		parse_textures(t_cub *cub);
 int		init_player(t_cub *cub);
-void    draw_ceiling(t_data *img, int stop, int col, t_color *c);
-void    draw_floor(t_data *img, int begin, int col, t_color *c);
-void    draw_texture(t_data *img, t_ray *r, int col, int texX);
-void    draw_lines(int col, t_ray *r, t_data *img, t_color *c);
-void    get_wallparams(t_ray *r, t_player *pl, t_texture *tex);
-void    get_rayhit(t_ray *r, char **map);
-void    get_raystep(t_ray *r, t_player *pl);
-void    get_rayparams(t_ray *r, t_player *pl);
+void	draw_ceiling(t_data *img, int stop, int col, t_color *c);
+void	draw_floor(t_data *img, int begin, int col, t_color *c);
+void	draw_texture(t_data *img, t_ray *r, int col, int texX);
+void	draw_lines(int col, t_ray *r, t_data *img, t_color *c);
+void	get_wallparams(t_ray *r, t_player *pl, t_texture *tex);
+void	get_rayhit(t_ray *r, char **map);
+void	get_raystep(t_ray *r, t_player *pl);
+void	get_rayparams(t_ray *r, t_player *pl);
 
 #endif

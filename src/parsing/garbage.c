@@ -18,10 +18,10 @@ static void	texture_garbage(t_cub *cub, t_texture *texture)
 	free(texture->so);
 	free(texture->we);
 	free(texture->ea);
-	mlx_destroy_image(cub->mlx, texture->tex_imgNO);
-	mlx_destroy_image(cub->mlx, texture->tex_imgSO);
-	mlx_destroy_image(cub->mlx, texture->tex_imgWE);
-	mlx_destroy_image(cub->mlx, texture->tex_imgEA);
+	mlx_destroy_image(cub->mlx, texture->tex_img_no);
+	mlx_destroy_image(cub->mlx, texture->tex_img_so);
+	mlx_destroy_image(cub->mlx, texture->tex_img_we);
+	mlx_destroy_image(cub->mlx, texture->tex_img_ea);
 }
 
 void	mapclear(char **map)
