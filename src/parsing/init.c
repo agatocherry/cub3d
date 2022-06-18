@@ -31,8 +31,8 @@ void    initial_dir(t_player *pl, char init_dir)
     {
         pl->dir_x = 1;
         pl->dir_y = 0;
-        pl->plane_x = -0.66;
-        pl->plane_y = 0;
+        pl->plane_x = 0;
+        pl->plane_y = -0.66;
     }
     else
         set_rest(pl, init_dir);
@@ -47,9 +47,9 @@ int init_player(t_cub *cub)
     //Get the player direction for function "initial-dir()"
 
     //Remove these 3 lines once parsing is done
-    cub->player.x = 11.5;
+    cub->player.x = 11;
     cub->player.y = 27;
-    init_dir = 'N';
+    init_dir = 'S';
     //
 
     initial_dir(&cub->player, init_dir);

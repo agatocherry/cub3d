@@ -18,10 +18,10 @@ static void	texture_garbage(t_texture *texture)
 	free(texture->so);
 	free(texture->we);
 	free(texture->ea);
-	free(texture->tex_imgNO);
-	free(texture->tex_imgSO);
-	free(texture->tex_imgWE);
-	free(texture->tex_imgEA);
+	mlx_destroy_image(texture->tex_imgNO);
+	mlx_destroy_image(texture->tex_imgSO);
+	mlx_destroy_image(texture->tex_imgWE);
+	mlx_destroy_image(texture->tex_imgEA);
 	free(texture->texNO);
 	free(texture->texSO);
 	free(texture->texWE);
@@ -42,16 +42,17 @@ void	mapclear(char **map)
 
 void	cleardata(t_data *data)
 {
-	free(data->img);
-	free(data->addr);
+	if (data->img)
+		free(data->img);
+	if (data->addr)
+		free(data->addr);
 }
 
 void	parsing_garbage(t_cub *cub)
 {
 	texture_garbage(&cub->tex);
 	mapclear(cub->map);
-	cleardata(&cub->img);
 	cleardata(&cub->minimap);
-	free(cub->mlx);
-	free(cub->mlx_win);
+	mlx_destroy_window(cub->mlx, cub->mlx_win);
+	mlx_destroy_display(cub->mlx);
 }
