@@ -8,7 +8,8 @@ void    get_wallparams(t_ray *r, t_player *pl, t_texture *tex)
             r->text = tex->texNO;
         else
             r->text = tex->texSO;
-        r->perpWallDist = (r->sideDistX - r->deltaDistX);
+        // r->perpWallDist = (r->sideDistX - r->deltaDistX);
+        r->perpWallDist = (r->mapX - pl->x + (1 - r->stepX) / 2) / r->dir_x;
         r->wallX = pl->y + r->perpWallDist * r->dir_y;
     }
     else
@@ -17,7 +18,8 @@ void    get_wallparams(t_ray *r, t_player *pl, t_texture *tex)
             r->text = tex->texWE;
         else
             r->text = tex->texEA;
-        r->perpWallDist = (r->sideDistY - r->deltaDistY);
+        r->perpWallDist = (r->mapY - pl->y + (1 - r->stepY) / 2) / r->dir_y;
+        // r->perpWallDist = (r->sideDistY - r->deltaDistY);
         r->wallX = pl->x + r->perpWallDist * r->dir_x;
     }
     r->wallX -= floor((r->wallX));
@@ -25,6 +27,7 @@ void    get_wallparams(t_ray *r, t_player *pl, t_texture *tex)
 
 void    get_rayhit(t_ray *r, char **map)
 {
+    r->hit = 0;
     while (r->hit == 0)
     {
         if (r->sideDistX < r->sideDistY)
@@ -74,14 +77,8 @@ void    get_rayparams(t_ray *r, t_player *pl)
     r->dir_y = pl->dir_y + pl->plane_y * pl->camera;
     r->mapX = (int)pl->x;
     r->mapY = (int)pl->y;
-    if (r->dir_x == 0)
-        r->deltaDistX = 1e30;
-    else
-        r->deltaDistX = fabs(1 / r->dir_x);
-    if (r->dir_y == 0)
-        r->deltaDistY = 1e30;
-    else
-        r->deltaDistY = fabs(1 / r->dir_y);
+    r->deltaDistX = fabs(1 / r->dir_x);
+    r->deltaDistY = fabs(1 / r->dir_y);
     r->hit = 0;
     get_raystep(r, pl);
 }

@@ -44,7 +44,7 @@ void    draw_texture(t_data *img, t_ray *r, int col, int texX)
         dst = img->addr + (y * img->line_l + col * (img->bpp / 8));
         texY = (int)texPos & (TEXHEIGHT - 1);
         texPos += step;
-        *(unsigned int*)dst = r->text[TEXHEIGHT * texY + texX];
+        *(unsigned int*)dst = *(r->text + TEXHEIGHT * texY + texX);
         y++;
         if (y == HEIGHT)
             return ;
@@ -56,7 +56,7 @@ void    draw_lines(int col, t_ray *r, t_data *img, t_color *c)
     int texX;
     int drawStart;
     int drawEnd;
-    int lineHeight;
+    long lineHeight;
 
     texX = (int)(r->wallX * (double)TEXWIDTH);
     if (r->side == 0 && r->dir_x > 0)
@@ -64,12 +64,14 @@ void    draw_lines(int col, t_ray *r, t_data *img, t_color *c)
     if (r->side == 1 && r->dir_y < 0)
         texX = TEXWIDTH - texX - 1;
     lineHeight = (int)(HEIGHT / r->perpWallDist);
-    drawStart = -lineHeight / 2 + HEIGHT / 2;
-    if (drawStart < 0)
+    drawStart = (-1 * lineHeight) / 2 + HEIGHT / 2;
+    if (drawStart < 0 || drawStart >= HEIGHT)
         drawStart = 0;
     drawEnd = lineHeight / 2 + HEIGHT / 2;
-    if (drawEnd >= HEIGHT)
+    if (drawEnd >= HEIGHT || drawEnd < 0)
         drawEnd = HEIGHT - 1;
+    if (drawEnd < 0)
+        printf("WallDist: %.2f, LineHeight: %ld\n", r->perpWallDist, lineHeight);
     draw_ceiling(img, drawStart, col, c);
     draw_texture(img, r, col, texX);
     draw_floor(img, drawEnd, col, c);

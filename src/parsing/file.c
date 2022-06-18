@@ -111,7 +111,7 @@ int	parsing(char *file_name, t_cub *cub)
 	// Save the colors in int format with function char_to_rgb()
 
 	// Remove these lines once parsing is done
-	cub->map = (char **)malloc(sizeof(char *) * 14);
+	cub->map = (char **)malloc(sizeof(char *) * 15);
 	cub->map[0] = ft_strdup("111111111111111111111111111111111");
 	cub->map[1] = ft_strdup("100000000011000000000000111111111");
 	cub->map[2] = ft_strdup("101100000111000000000000111111111");
@@ -126,6 +126,7 @@ int	parsing(char *file_name, t_cub *cub)
 	cub->map[11] = ft_strdup("11000001110101011111011110N011111");
 	cub->map[12] = ft_strdup("111101110111010101011110100011111");
 	cub->map[13] = ft_strdup("111111110111111101111111111111111");
+	cub->map[14] = NULL;
 
 	cub->color.f = char_to_rgb("255, 0, 0"); // red
 	cub->color.c = char_to_rgb("0, 255, 0"); // green
