@@ -83,13 +83,13 @@ int	game_launch(t_cub *cub)
 	cub->mlx = mlx_init(); // protéger toutes les fonctions mlx
 	if (!cub->mlx)
 	{
-		error_message("Mlx_Init() failed");
+		error_message("Error\nMlx_Init() failed");
 		return (1);
 	}
 	cub->mlx_win = mlx_new_window(cub->mlx, WIDTH, HEIGHT, "Cub3d");
 	if (!cub->mlx_win)
 	{
-		error_message("Mlx_New_Window() failed");
+		error_message("Error\nMlx_New_Window() failed");
 		return (1);
 	}
 	parse_textures(cub);

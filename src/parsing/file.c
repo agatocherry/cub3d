@@ -128,8 +128,8 @@ int	parsing(char *file_name, t_cub *cub)
 	cub->map[13] = ft_strdup("111111110111111101111111111111111");
 	cub->map[14] = NULL;
 
-	cub->color.f = char_to_rgb("255, 0, 0"); // red
-	cub->color.c = char_to_rgb("0, 255, 0"); // green
+	cub->color.f = char_to_rgb("25, 110, 0");
+	cub->color.c = char_to_rgb("0, 255, 4");
 	cub->color.set = 1; // if no color info found, set = 0
 
 	cub->tex.ea = ft_strdup("./assets/wood1.xpm");
