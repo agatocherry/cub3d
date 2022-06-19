@@ -16,42 +16,42 @@ void	moveleft(char **map, t_player *pl)
 {
 	double	speed;
 
-	speed = 0.0002;
-	if (map[(int)(pl->x)][(int)(pl->y + pl->dir_x * speed)] == '0')
-		pl->y += pl->dir_x * speed;
+	speed = 0.2;
 	if (map[(int)(pl->x - pl->dir_y * speed)][(int)(pl->y)] == '0')
-		pl->x -= pl->dir_y * speed;
+		pl->x -= pl->dir_y * speed * 0.001;
+	if (map[(int)(pl->x)][(int)(pl->y + pl->dir_x * speed)] == '0')
+		pl->y += pl->dir_x * speed * 0.001;
 }
 
 void	moveright(char **map, t_player *pl)
 {
 	double	speed;
 
-	speed = 0.0002;
+	speed = 0.2;
+	if (map[(int)(pl->x + pl->dir_y * speed)][(int)(pl->y)] == '0')
+		pl->x += pl->dir_y * speed * 0.001;
 	if (map[(int)(pl->x)][(int)(pl->y - pl->dir_x * speed)] == '0')
-		pl->y -= pl->dir_x * speed;
-	if (map[(int)(pl->x - pl->dir_y * speed)][(int)(pl->y)] == '0')
-		pl->x += pl->dir_y * speed;
+		pl->y -= pl->dir_x * speed * 0.001;
 }
 
 void	moveforward(char **map, t_player *pl)
 {
 	double	speed;
 
-	speed = 0.0002;
+	speed = 0.2;
 	if (map[(int)(pl->x + pl->dir_x * speed)][(int)(pl->y)] == '0')
-		pl->x += pl->dir_x * speed;
+		pl->x += pl->dir_x * speed * 0.001;
 	if (map[(int)(pl->x)][(int)(pl->y + pl->dir_y * speed)] == '0')
-		pl->y += pl->dir_y * speed;
+		pl->y += pl->dir_y * speed * 0.001;
 }
 
 void	movebackward(char **map, t_player *pl)
 {
 	double	speed;
 
-	speed = 0.0002;
+	speed = 0.2;
 	if (map[(int)(pl->x - pl->dir_x * speed)][(int)(pl->y)] == '0')
-		pl->x -= pl->dir_x * speed;
+		pl->x -= pl->dir_x * speed * 0.001;
 	if (map[(int)(pl->x)][(int)(pl->y - pl->dir_y * speed)] == '0')
-		pl->y -= pl->dir_y * speed;
+		pl->y -= pl->dir_y * speed * 0.001;
 }
