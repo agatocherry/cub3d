@@ -4,12 +4,24 @@ CC		=	clang
 CFLAGS	=	-g #-Wall -Werror -Wextra
 NAME	=	cub3d
 SRCS	=	src/main.c \
-			src/parsing/file.c src/parsing/error.c src/parsing/garbage.c src/parsing/init.c \
-			src/game/launch.c src/game/rotate.c src/game/movements.c \
-			src/draw/drawWindow.c src/draw/textures.c src/draw/lines.c src/draw/ray.c
-# src/parsing/color.c src/parsing/map.c src/parsing/texture.c
-# src/parsing/lst/add.c src/parsing/lst/garbage.c
-# src/draw/minimap.c
+			src/error.c \
+			\
+			src/parsing/file.c \
+			src/parsing/garbage.c \
+			src/parsing/init.c \
+			src/parsing/texture.c \
+			src/parsing/color.c \
+			src/parsing/map/add.c \
+			src/parsing/map/wall.c \
+			src/parsing/map/utils.c \
+			\
+			src/game/launch.c \
+			src/game/rotate.c \
+			src/game/movements.c \
+			src/draw/drawWindow.c \
+			src/draw/textures.c \
+			src/draw/lines.c \
+			src/draw/ray.c
 OBJ		=	$(SRCS:.c=.o)
 
 # Rules
@@ -39,7 +51,7 @@ test: $(NAME)
 	./$(NAME) maps/file.cub
 
 vtest: $(NAME)
-	valgrind ./$(NAME) maps/file.cub
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) maps/file.cub
 
 re: fclean
 	make all

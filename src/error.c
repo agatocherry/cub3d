@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   garbage.c                                          :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agcolas <agcolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 10:33:21 by agcolas           #+#    #+#             */
-/*   Updated: 2022/05/31 16:05:06 by agcolas          ###   ########.fr       */
+/*   Updated: 2022/06/27 15:36:23 by agcolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/cub3d.h"
+#include "../include/cub3d.h"
 
-void	mapclear(char **map)
+int	error_message(char *str)
 {
-	int	i;
-
-	i = -1;
-	if (!map)
-		return ;
-	while (map[++i])
-		free(map[i]);
-	free(map);
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("\n", 2);
+	return (1);
 }

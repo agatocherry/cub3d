@@ -6,7 +6,7 @@
 /*   By: agcolas <agcolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 11:43:21 by agcolas           #+#    #+#             */
-/*   Updated: 2022/06/18 15:03:56 by shdorlin         ###   ########.fr       */
+/*   Updated: 2022/06/27 15:36:11 by agcolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,6 @@ int	loop_game(t_cub *cub)
 	draw_window(cub);
 	mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.img, 0, 0);
 	mlx_destroy_image(cub->mlx, cub->img.img);
-	
-	// if (cub->show_map == 1)
-	// {
-	//     cub->img.img = mlx_new_image(cub->mlx, get_mapW(cub->map), get_mapH(cub->map));
-	//     minimap(cub->map, &cub->img); This function will draw the minimap to the image cub->img
-	//     mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img.img, WIDTH - get_mapW(cub->map) - 10 , HEIGHT - getmapH(cub->map) - 10);
-	//     mlx_destroy_image(cub->mlx, cub->img.img);
-	// }
-	
 	return (0);
 }
 
@@ -80,7 +71,7 @@ int	key_released(int key, t_cub *cub)
 
 int	game_launch(t_cub *cub)
 {
-	cub->mlx = mlx_init(); // protéger toutes les fonctions mlx
+	cub->mlx = mlx_init();
 	if (!cub->mlx)
 	{
 		error_message("Error\nMlx_Init() failed");
@@ -93,6 +84,7 @@ int	game_launch(t_cub *cub)
 		return (1);
 	}
 	parse_textures(cub);
+	cub->win_up = 1;
 	mlx_hook(cub->mlx_win, 2, 1L << 0, key_pressed, (void *)cub);
 	mlx_key_hook(cub->mlx_win, key_released, (void *)cub);
 	mlx_hook(cub->mlx_win, 17, 1, close_game, (void *)cub);

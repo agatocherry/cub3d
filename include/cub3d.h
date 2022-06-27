@@ -6,7 +6,7 @@
 /*   By: agcolas <agcolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 09:17:28 by agcolas           #+#    #+#             */
-/*   Updated: 2022/06/07 11:47:08 by agcolas          ###   ########.fr       */
+/*   Updated: 2022/06/27 15:39:05 by agcolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <string.h>
 # include <math.h>
 
-# define WIDTH 1280
+# define WIDTH 1250
 # define HEIGHT 720
 # define TEXWIDTH 64
 # define TEXHEIGHT 64
@@ -114,27 +114,26 @@ typedef struct s_cub
 	void		*mlx_win;
 	char		**map;
 	int			show_map;
+	int			win_up;
 }	t_cub;
 
-int		error_message(char *str);
-int		error_file(char *file);
-//int		error_map(t_map *map);
 int		parsing(char *file_name, t_cub *cub);
-void	color_f(char *line, t_color *color);
-void	color_c(char *line, t_color *color);
-void	texture_no(char *line, t_texture *texture);
-void	texture_so(char *line, t_texture *texture);
-void	texture_we(char *line, t_texture *texture);
-void	texture_ea(char *line, t_texture *texture);
-//int		mapsize(t_map *map);
-//t_map	*mapnew(char *line);
-//t_map	*maplast(t_map *map);
-//void	mapadd_back(t_map **amap, t_map *lnew);
-void	mapclear(char **map);
-int		is_map(char *line);
-void	print_map(char **map);
-void	map(char *line, t_cub *cub);
 void	parsing_garbage(t_cub *cub);
+int		color_f(char *line, t_color *color);
+int		color_c(char *line, t_color *color);
+int		texture_no(char *line, t_texture *texture);
+int		texture_so(char *line, t_texture *texture);
+int		texture_we(char *line, t_texture *texture);
+int		texture_ea(char *line, t_texture *texture);
+int		add_map(int fd, char *file_name, t_cub *cub, char *line);
+int		check_extension(char *file, char *ext);
+int		is_map(char *line);
+void	init_parsing(t_cub *cub);
+int		error_map(t_cub *cub, int longest_char);
+int		check_walls(char **map, int longest_char);
+int		end_loop(char *line, int fd);
+int		error_message(char *str);
+int		time_error(int time);
 
 int		game_launch(t_cub *cub);
 void	draw_window(t_cub *cub);

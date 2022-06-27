@@ -18,7 +18,7 @@ void	rotateleft(t_player *pl)
 	double	old_dirx;
 	double	old_planex;
 
-	speed = 0.0001;
+	speed = 0.00001;
 	old_dirx = pl->dir_x;
 	pl->dir_x = pl->dir_x * cos(speed) - pl->dir_y * sin(speed);
 	pl->dir_y = old_dirx * sin(speed) + pl->dir_y * cos(speed);

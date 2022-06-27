@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agcolas <agcolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 10:33:21 by agcolas           #+#    #+#             */
-/*   Updated: 2022/05/31 16:05:06 by agcolas          ###   ########.fr       */
+/*   Updated: 2022/06/27 15:34:36 by agcolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../../include/cub3d.h"
 
 int	is_map(char *line)
 {
@@ -32,19 +32,61 @@ int	is_map(char *line)
 	return (0);
 }
 
-void	print_map(char **map)
+static void	fill_blank(char *to_fill, int size_max)
+{
+	int	len;
+
+	len = ft_strlen(to_fill);
+	while (len < size_max - 1)
+	{
+		to_fill[len] = ' ';
+		len++;
+	}
+	to_fill[len] = '\0';
+}
+
+static void	replace_space(char **cub, int longest_char)
 {
 	int	i;
+	int	j;
 
+	j = 0;
 	i = 0;
-	while (map[i])
+	while (cub[i])
 	{
-		printf("Map %i [%s]\n", i, map[i]);
+		j = 0;
+		while (j < longest_char)
+		{
+			if (cub[i][j] == ' ')
+				cub[i][j] = '1';
+			j++;
+		}
 		i++;
 	}
 }
 
-// void	map(char *line, t_file *file)
-// {
-// 	mapadd_back(&file->map, mapnew(ft_substr(line, 0, ft_strlen(line) - 1)));
-// }
+int	error_map(t_cub *cub, int longest_char)
+{
+	int	i;
+
+	i = 0;
+	while (cub->map[i])
+	{
+		if (is_map(cub->map[i]) == 1)
+			return (error_message("Map is not valid"));
+		i++;
+	}
+	if (check_walls(cub->map, longest_char) == 1)
+		return (error_message("Map is not valid"));
+	replace_space(cub->map, longest_char);
+	return (0);
+}
+
+int	time_error(int time)
+{
+	if (time > 1)
+		return (error_message("Map have multiple start"));
+	if (time == 0)
+		return (error_message("Map do not have start"));
+	return (0);
+}
