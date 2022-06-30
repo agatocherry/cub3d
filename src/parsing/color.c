@@ -51,9 +51,10 @@ int	color_f(char *line, t_color *color)
 		return (error_message("Color F is too short"));
 	if (check_characters(&line[2]) == 1)
 		return (error_message("Color F have incorrect syntax"));
-	if (color->f != 0)
+	if (color->setf != 0)
 		return (error_message("Color F have multiple definition"));
 	color->f = char_to_rgb(&line[2]);
+	color->setf++;
 	return (0);
 }
 
@@ -63,8 +64,9 @@ int	color_c(char *line, t_color *color)
 		return (error_message("Color C is too short"));
 	if (check_characters(&line[2]) == 1)
 		return (error_message("Color C have incorrect syntax"));
-	if (color->c != 0)
+	if (color->setc != 0)
 		return (error_message("Color C have multiple definition"));
 	color->c = char_to_rgb(&line[2]);
+	color->setc++;
 	return (0);
 }

@@ -52,6 +52,8 @@ typedef struct s_texture
 
 typedef struct s_color
 {
+	int	setf;
+	int	setc;
 	int	set;
 	int	f;
 	int	c;
