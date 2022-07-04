@@ -1,0 +1,12 @@
+NO ./assets/tile1.xpm
+SO ./assets/tile3.xpm
+WE ./assets/wood1.xpm
+EA ./assets/bricks1.xpm
+
+F 85,159,159
+C 144,244,128
+
+1111111
+1010101
+100N001
+1111111

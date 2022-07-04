@@ -6,7 +6,7 @@
 /*   By: agcolas <agcolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 09:17:28 by agcolas           #+#    #+#             */
-/*   Updated: 2022/06/27 15:39:05 by agcolas          ###   ########.fr       */
+/*   Updated: 2022/07/04 17:42:56 by agcolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int		texture_we(char *line, t_texture *texture);
 int		texture_ea(char *line, t_texture *texture);
 int		add_map(int fd, char *file_name, t_cub *cub, char *line);
 int		check_extension(char *file, char *ext);
-int		is_map(char *line);
+int		is_map(char *line, int err);
 void	init_parsing(t_cub *cub);
 int		error_map(t_cub *cub, int longest_char);
 int		check_walls(char **map, int longest_char);

@@ -6,7 +6,7 @@
 /*   By: agcolas <agcolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 10:33:21 by agcolas           #+#    #+#             */
-/*   Updated: 2022/06/27 15:25:19 by agcolas          ###   ########.fr       */
+/*   Updated: 2022/07/04 17:43:51 by agcolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	size_line(char *file_name)
 	fd = open(file_name, O_RDONLY);
 	while (ft_gnl(fd, &line) > 0)
 	{
-		if (is_map(line) == 0)
+		if (is_map(line, 0) == 0)
 			break ;
 		free(line);
 	}
@@ -47,7 +47,7 @@ static int	longest_strlen(char *file_name)
 	fd = open(file_name, O_RDONLY);
 	while (ft_gnl(fd, &line) > 0)
 	{
-		if (is_map(line) == 0)
+		if (is_map(line, 0) == 0)
 			break ;
 		free(line);
 	}

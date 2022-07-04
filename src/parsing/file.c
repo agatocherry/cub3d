@@ -6,7 +6,7 @@
 /*   By: agcolas <agcolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 11:40:38 by agcolas           #+#    #+#             */
-/*   Updated: 2022/06/27 15:31:48 by agcolas          ###   ########.fr       */
+/*   Updated: 2022/07/04 17:43:13 by agcolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	read_line(int fd, t_cub *cub, char *file_name)
 	while (ft_gnl(fd, &line) > 0)
 	{
 		line = ft_one_sep(line, ' ');
-		if (is_map(line) == 0)
+		if (is_map(line, 0) == 0)
 		{
 			if (add_map(fd, file_name, cub, line) == 1)
 				return (end_loop(line, fd));

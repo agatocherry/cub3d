@@ -49,9 +49,15 @@ fclean: clean
 
 test: $(NAME)
 	./$(NAME) maps/file.cub
+	./$(NAME) maps/medium.cub
+	./$(NAME) maps/small.cub
+	# ./$(NAME) maps/spaces.cub
+	# ./$(NAME) maps/big.cub
 
 vtest: $(NAME)
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) maps/file.cub
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) maps/medium.cub
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) maps/small.cub
 
 re: fclean
 	make all

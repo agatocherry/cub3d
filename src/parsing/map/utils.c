@@ -6,13 +6,13 @@
 /*   By: agcolas <agcolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 10:33:21 by agcolas           #+#    #+#             */
-/*   Updated: 2022/06/27 15:34:36 by agcolas          ###   ########.fr       */
+/*   Updated: 2022/07/04 17:47:41 by agcolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-int	is_map(char *line)
+int	is_map(char *line, int err)
 {
 	int	i;
 
@@ -24,7 +24,16 @@ int	is_map(char *line)
 			&& line[i] != 'W' && line[i] != 'E'
 			&& line[i] != '\n' && line[i] != ' '
 			&& line[i] != EOF)
+		{
+			if (err == 1)
+			{
+				ft_putstr_fd("Error\n", 2);
+				ft_putstr_fd("There is an invalid character in map : ", 2);
+				ft_putchar_fd(line[i], 2);
+				ft_putstr_fd("\n", 2);
+			}
 			return (1);
+		}
 		i++;
 	}
 	if (ft_strcmp(line, "\n") == 0)
@@ -72,12 +81,12 @@ int	error_map(t_cub *cub, int longest_char)
 	i = 0;
 	while (cub->map[i])
 	{
-		if (is_map(cub->map[i]) == 1)
-			return (error_message("Map is not valid"));
+		if (is_map(cub->map[i], 1) == 1)
+			return (1);
 		i++;
 	}
 	if (check_walls(cub->map, longest_char) == 1)
-		return (error_message("Map is not valid"));
+		return (error_message("Map walls aren't closed"));
 	replace_space(cub->map, longest_char);
 	return (0);
 }

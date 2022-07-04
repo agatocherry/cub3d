@@ -6,7 +6,7 @@
 /*   By: agcolas <agcolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 10:33:21 by agcolas           #+#    #+#             */
-/*   Updated: 2022/06/27 15:30:12 by agcolas          ###   ########.fr       */
+/*   Updated: 2022/07/04 17:46:54 by agcolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	first_line(char **map)
 		else if (map[0][i] == ' ' && map[1][i] && map[1][i] == '1')
 			error = 0;
 		if (error == 1)
-			return (1);
+			return (error_message("North wall map isn't closed"));
 		i++;
 	}
 	return (0);
@@ -46,7 +46,7 @@ static int	first_char(char **map)
 		else if (map[i][0] == ' ' && map[i][1] && map[i][1] == '1')
 			error = 0;
 		if (error == 1)
-			return (1);
+			return (error_message("North wall map isn't closed"));
 		i++;
 	}
 	return (0);
