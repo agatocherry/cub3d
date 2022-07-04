@@ -1,16 +1,11 @@
-NO                     ./assets/tile1.xpm
+NO ./assets/tile1.xpm
+SO ./assets/tile2.xpm
+WE ./assets/wood1.xpm
+EA ./assets/bricks4.xpm
 
-
-
-        SO ./assets/tile2.xpm
-
-WE ./assets/wood1.xpm                 
-
-EA      ./assets/bricks4.xpm
-
-F 139,            69, 19
-      C       0,128,128
-
+F 139,69,19
+F 45, 90, 2
+C 0,128,128
 
 111111111111111111111111111111111
 100000100000000000000000000000001

@@ -15,15 +15,19 @@
 int	check_extension(char *file, char *ext)
 {
 	int	i;
+	int	error;
 
 	i = 0;
-	if (ft_strncmp(file, "./", 2) == 0)
-		i += 2;
-	if (ft_strncmp(file, "../", 3) == 0)
-		i += 3;
-	while (file[i] && file[i] != '.')
+	error = 0;
+	while (file[i])
 		i++;
-	if (ft_strcmp(&file[i], ext) != 0)
+	while (file[i] != '.')
+		i--;
+	if (file[i + 4] != '\n' && file[i + 4] != ' ' && file[i + 4] != '\0' && file[i + 4] != '\r')
+		error++;
+	if (ft_strncmp(&file[i], ext, 4) != 0)
+		error++;
+	if (error)
 	{
 		ft_putstr_fd("Error\n", 2);
 		ft_putstr_fd("Extension of the file is not ", 2);
@@ -63,6 +67,7 @@ static int	read_line(int fd, t_cub *cub, char *file_name)
 
 	while (ft_gnl(fd, &line) > 0)
 	{
+		line = ft_one_sep(line, ' ');
 		if (is_map(line) == 0)
 		{
 			if (add_map(fd, file_name, cub, line) == 1)

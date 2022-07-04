@@ -38,7 +38,7 @@ static int	check_characters(char *line)
 	i = 0;
 	while (line[i] && line[i] != '\n')
 	{
-		if (line[i] != ',' && ft_isdigit(line[i]) == 0)
+		if (line[i] != ',' && ft_isdigit(line[i]) == 0 && line[i] != ' ')
 			return (1);
 		i++;
 	}

@@ -1,6 +1,5 @@
 /* XPM */
-static char *result[] = {
-/* columns rows colors chars-per-pixel */
+static char *wood5[] = {
 "64 64 22 1 ",
 "  c #3F0E00",
 ". c #410F00",

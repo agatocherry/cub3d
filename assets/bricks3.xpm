@@ -1,6 +1,5 @@
 /* XPM */
-static char *_7eb77819bb74c8fde6d17af9cb140c1UMuOlseSQUdsHSv9[] = {
-/* columns rows colors chars-per-pixel */
+static char *bricks3[] = {
 "64 64 137 2 ",
 "   c #7A6C63",
 ".  c #7E7064",

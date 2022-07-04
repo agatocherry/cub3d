@@ -45,11 +45,11 @@ int	texture_no(char *line, t_texture *texture)
 
 	if (ft_strlen(line) <= 4)
 		return (error_message("Texture NO is too short"));
-	if (check_extension(&line[3], ".xpm\n") == 1)
-		return (1);
 	if (texture->no != NULL)
 		return (error_message("Texture NO have multiple definition"));
 	texture->no = ft_substr(line, 3, ft_strlen(line) - 4);
+	if (check_extension(&line[3], ".xpm") == 1)
+		return (1);
 	fd = open(texture->no, O_RDONLY | O_WRONLY);
 	if (fd == -1)
 	{
