@@ -86,7 +86,7 @@ int	error_map(t_cub *cub, int longest_char)
 		i++;
 	}
 	if (check_walls(cub->map, longest_char) == 1)
-		return (error_message("Map walls aren't closed"));
+		return (1);
 	replace_space(cub->map, longest_char);
 	return (0);
 }

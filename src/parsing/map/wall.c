@@ -46,7 +46,7 @@ static int	first_char(char **map)
 		else if (map[i][0] == ' ' && map[i][1] && map[i][1] == '1')
 			error = 0;
 		if (error == 1)
-			return (error_message("North wall map isn't closed"));
+			return (error_message("West wall map isn't closed"));
 		i++;
 	}
 	return (0);
@@ -68,7 +68,7 @@ static int	last_char(char **map, int longest_char)
 		else if (map[i][j] == ' ' && map[i][j - 1] && map[i][j - 1] == '1')
 			error = 0;
 		if (error == 1)
-			return (1);
+			return (error_message("East map wall isn't closed"));
 		i++;
 	}
 	return (0);
@@ -92,7 +92,7 @@ static int	last_line(char **map)
 		else if (map[j][i] == ' ' && map[j - 1][i] && map[j - 1][i] == '1')
 			error = 0;
 		if (error == 1)
-			return (1);
+			return (error_message("South map wall isn't closed"));
 		i++;
 	}
 	return (0);

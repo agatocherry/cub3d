@@ -41,22 +41,22 @@ int	check_extension(char *file, char *ext)
 
 static int	save_element(char *line, t_cub *cub)
 {
-	if (ft_strncmp(line, "F", 1) == 0)
+	if (ft_strncmp(line, "F ", 2) == 0)
 		if (color_f(line, &cub->color) == 1)
 			return (1);
-	if (ft_strncmp(line, "C", 1) == 0)
+	if (ft_strncmp(line, "C ", 2) == 0)
 		if (color_c(line, &cub->color) == 1)
 			return (1);
-	if (ft_strncmp(line, "NO", 2) == 0)
+	if (ft_strncmp(line, "NO ", 3) == 0)
 		if (texture_no(line, &cub->tex) == 1)
 			return (1);
-	if (ft_strncmp(line, "SO", 2) == 0)
+	if (ft_strncmp(line, "SO ", 3) == 0)
 		if (texture_so(line, &cub->tex) == 1)
 			return (1);
-	if (ft_strncmp(line, "WE", 2) == 0)
+	if (ft_strncmp(line, "WE ", 3) == 0)
 		if (texture_we(line, &cub->tex) == 1)
 			return (1);
-	if (ft_strncmp(line, "EA", 2) == 0)
+	if (ft_strncmp(line, "EA ", 3) == 0)
 		if (texture_ea(line, &cub->tex) == 1)
 			return (1);
 	return (0);
@@ -90,10 +90,9 @@ static int	check_parsing(t_cub *cub)
 		return (error_message("All textures are not defined"));
 	if (cub->map == NULL)
 		return (error_message("No map found"));
-	if (cub->color.f != 0 && cub->color.c != 0)
-		cub->color.set = 1;
-	else
-		cub->color.set = 0;
+	if (cub->color.f == 0 || cub->color.c == 0)
+		return (error_message("All colors are not defined"));
+	cub->color.set = 1;
 	return (0);
 }
 
