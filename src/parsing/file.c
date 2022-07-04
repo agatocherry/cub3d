@@ -23,7 +23,8 @@ int	check_extension(char *file, char *ext)
 		i++;
 	while (file[i] != '.')
 		i--;
-	if (file[i + 4] != '\n' && file[i + 4] != ' ' && file[i + 4] != '\0' && file[i + 4] != '\r')
+	if (file[i + 4] != '\n' && file[i + 4] != ' ' &&
+	    file[i + 4] != '\0' && file[i + 4] != '\r')
 		error++;
 	if (ft_strncmp(&file[i], ext, 4) != 0)
 		error++;
