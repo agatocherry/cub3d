@@ -6,7 +6,7 @@
 /*   By: agcolas <agcolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 10:33:21 by agcolas           #+#    #+#             */
-/*   Updated: 2022/06/23 12:13:34 by agcolas          ###   ########.fr       */
+/*   Updated: 2022/07/05 13:25:37 by agcolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	texture_no(char *line, t_texture *texture)
 	fd = open(texture->no, O_RDONLY | O_WRONLY);
 	if (fd == -1)
 	{
-		ft_putstr_fd("Error\nNo such file or directory: ", 2);
+		ft_putstr_fd("Error\nTexture NO is not a file: ", 2);
 		ft_putstr_fd(texture->no, 2);
 		ft_putstr_fd("\n", 2);
 		return (1);
@@ -78,7 +78,7 @@ int	texture_so(char *line, t_texture *texture)
 	fd = open(texture->so, O_RDONLY | O_WRONLY);
 	if (fd == -1)
 	{
-		ft_putstr_fd("Error\nNo such file or directory: ", 2);
+		ft_putstr_fd("Error\nTexture SO is not a file: ", 2);
 		ft_putstr_fd(texture->so, 2);
 		ft_putstr_fd("\n", 2);
 		return (1);
@@ -103,7 +103,7 @@ int	texture_we(char *line, t_texture *texture)
 	fd = open(texture->we, O_RDONLY | O_WRONLY);
 	if (fd == -1)
 	{
-		ft_putstr_fd("Error\nNo such file or directory: ", 2);
+		ft_putstr_fd("Error\nTexture WE is not a file: ", 2);
 		ft_putstr_fd(texture->we, 2);
 		ft_putstr_fd("\n", 2);
 		return (1);
@@ -128,7 +128,7 @@ int	texture_ea(char *line, t_texture *texture)
 	fd = open(texture->ea, O_RDONLY | O_WRONLY);
 	if (fd == -1)
 	{
-		ft_putstr_fd("Error\nNo such file or directory: ", 2);
+		ft_putstr_fd("Error\nTexture EA is not a file: ", 2);
 		ft_putstr_fd(texture->ea, 2);
 		ft_putstr_fd("\n", 2);
 		return (1);

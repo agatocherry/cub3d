@@ -51,7 +51,7 @@ test: $(NAME)
 	./$(NAME) maps/file.cub
 	./$(NAME) maps/medium.cub
 	./$(NAME) maps/small.cub
-	# ./$(NAME) maps/spaces.cub
+	./$(NAME) maps/spaces.cub
 	# ./$(NAME) maps/big.cub
 
 vtest: $(NAME)

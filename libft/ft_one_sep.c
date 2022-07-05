@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_one_sep.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shdorlin <shdorlin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agcolas <agcolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 22:01:22 by shdorlin          #+#    #+#             */
-/*   Updated: 2022/03/20 19:11:52 by shdorlin         ###   ########.fr       */
+/*   Updated: 2022/07/05 13:25:38 by agcolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ static void	ft_cpy(char *str, char sep, char *new_str)
 			new_str[j++] = sep;
 		while (str[i] == sep && str[i])
 			i++;
+	}
+	if (new_str[j - 2] && new_str[j - 2] == ' ')
+	{
+		new_str[j - 2] = new_str[j - 1];
+		new_str[j - 1] = '\0';
 	}
 	new_str[j] = '\0';
 }
